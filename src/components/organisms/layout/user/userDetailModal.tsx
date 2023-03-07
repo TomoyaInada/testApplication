@@ -1,39 +1,52 @@
-import { Box, FormControl, FormLabel, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Stack
+} from "@chakra-ui/react";
 import { VFC, memo } from "react";
+import { User } from "../../../../types/api/user";
 
 type Props = {
-  isOpen: boolean,
-  onClose: () => void
+  user: User | null;
+  isOpen: boolean;
+  onClose: () => void;
 };
 
 export const UserDetailModal: VFC<Props> = memo((props) => {
-  const { isOpen, onClose } = props
+  const { user, isOpen, onClose } = props;
   return (
     <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
-    <ModalOverlay />
-    <ModalContent pb={6}>
-      <ModalHeader>
-        <ModalCloseButton />
-        <ModalBody mx={4}>
-          <Stack spacing={4}>
-            <FormControl>
-              <FormLabel>名前</FormLabel>
-              <Input value="ははは" isReadOnly />
-            </FormControl>
-            <FormControl>
-              <FormLabel>フルネーム</FormLabel>
-              <Input value="はははは" isReadOnly />
-            </FormControl>
-            <FormLabel>MAIL</FormLabel>
-            <Input value="ははあは" isReadOnly />
-            <FormControl>
-              <FormLabel>TEL</FormLabel>
-              <Input value="ははああは" isReadOnly />
-            </FormControl>
-          </Stack>
-        </ModalBody>
-      </ModalHeader>
-    </ModalContent>
-  </Modal>
+      <ModalOverlay />
+      <ModalContent pb={6}>
+        <ModalHeader>
+          <ModalCloseButton />
+          <ModalBody mx={4}>
+            <Stack spacing={4}>
+              <FormControl>
+                <FormLabel>名前</FormLabel>
+                <Input value={user?.username} isReadOnly />
+              </FormControl>
+              <FormControl>
+                <FormLabel>フルネーム</FormLabel>
+                <Input value={user?.name} isReadOnly />
+              </FormControl>
+              <FormLabel>MAIL</FormLabel>
+              <Input value={user?.email} isReadOnly />
+              <FormControl>
+                <FormLabel>TEL</FormLabel>
+                <Input value={user?.phone} isReadOnly />
+              </FormControl>
+            </Stack>
+          </ModalBody>
+        </ModalHeader>
+      </ModalContent>
+    </Modal>
   );
 });
