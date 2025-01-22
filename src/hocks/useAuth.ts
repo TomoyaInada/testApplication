@@ -13,28 +13,31 @@ export const useAuth = () => {
 
   const [loading, setLoading] = useState(false);
 
+  // テストコメント
+  const login = useCallback(
+    (id: string) => {
+      setLoading(true);
 
-  const login = useCallback((id: string) => {
-    setLoading(true);
-
-    axios
-      .get<User>(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then((res) => {
-        if (res.data) {
-          const isAdmin = res.data.id === 10 ? true : false;
-          setLoginUser({...res.data, isAdmin})
-          showMessage({ title: "ログインしました", status: "success" });
-          history.push("/home");
-        } else {
-          showMessage({ title: "ユーザーが見つかりません", status: "error" });
+      axios
+        .get<User>(`https://jsonplaceholder.typicode.com/users/${id}`)
+        .then((res) => {
+          if (res.data) {
+            const isAdmin = res.data.id === 10 ? true : false;
+            setLoginUser({ ...res.data, isAdmin });
+            showMessage({ title: "ログインしました", status: "success" });
+            history.push("/home");
+          } else {
+            showMessage({ title: "ユーザーが見つかりません", status: "error" });
+            setLoading(false);
+          }
+        })
+        .catch(() => {
+          showMessage({ title: "ログイン出来ません", status: "error" });
           setLoading(false);
-        }
-      })
-      .catch(() => {
-        showMessage({ title: "ログイン出来ません", status: "error" });
-        setLoading(false);
-      });
-  }, [history, showMessage, setLoginUser]);
+        });
+    },
+    [history, showMessage, setLoginUser]
+  );
 
   return { login, loading, setLoginUser };
 };
