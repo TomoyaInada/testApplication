@@ -47,6 +47,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## テスト記述
 
+main の read me を変えます。
 testtesttest
 
 - test
