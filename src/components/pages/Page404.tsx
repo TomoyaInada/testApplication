@@ -1,7 +1,5 @@
 import { VFC, memo } from "react";
 
 export const Page404: VFC = memo(() => {
-    return (
-        <p>404ページです</p>
-    );
-})
+  return <p>404 not found</p>;
+});
