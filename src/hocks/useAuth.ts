@@ -24,7 +24,7 @@ export const useAuth = () => {
           if (res.data) {
             const isAdmin = res.data.id === 10 ? true : false;
             setLoginUser({ ...res.data, isAdmin });
-            showMessage({ title: "ログインしました", status: "success" });
+            showMessage({ title: "ようこそ", status: "success" });
             history.push("/home");
           } else {
             showMessage({ title: "ユーザーが見つかりません", status: "error" });
@@ -32,7 +32,7 @@ export const useAuth = () => {
           }
         })
         .catch(() => {
-          showMessage({ title: "ログイン出来ません", status: "error" });
+          showMessage({ title: "ログイン出来ませんでした", status: "error" });
           setLoading(false);
         });
     },
